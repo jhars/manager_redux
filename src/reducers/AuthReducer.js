@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED
@@ -38,6 +39,17 @@ export default (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
+};
+
+export const loginUser = ({ email, password }) => {
+  firebase.auth.signInWithEmailAndPassword(email, password)
+  .then(user => console.log(user));
+
+  //we are goint to use redux-thunk to handle
+  // any type of asynchronous action creator
+  // that we use throughout our code base
+
+  //redux thunk allows us to bend the rules of action creators
 };
 
 //whenever we dispatch an action
