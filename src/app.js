@@ -22,8 +22,8 @@ class App extends Component {
 
   // LifeCycle Method #1
   render() {
-    return(
-      <Provider store={ createStore(reducers) }>
+    return (
+      <Provider store={createStore(reducers)}>
         <LoginForm />
       </Provider>
     );
