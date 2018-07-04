@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { View, Text } from 'react-native';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
@@ -28,6 +29,18 @@ class LoginForm extends Component {
     this.props.passwordChanged(text);
   }
 
+  renderError() {
+    if (this.props.error) {
+      return (
+        <View style={{ backgroundColor: 'white' }}>
+          <Text style={styles.errorTextStyle}>
+            {this.props.error}
+          </Text>
+        </View>
+      );
+    }
+  }
+
   render() {
     return (
       <Card>
@@ -50,6 +63,8 @@ class LoginForm extends Component {
           />
         </CardSection>
 
+        {this.renderError()}
+
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>
             Login
@@ -60,14 +75,24 @@ class LoginForm extends Component {
   }
 }
 
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red'
+  }
+};
+
 const mapStateToProps = state => {
   //is specifically 'auth'
   // b/c that is the value that we assigned our reducer to
   // in our combiedReducers call// in the reducers/index.js file
   // our reducer is what is actually producing this 'email' property
+
   return {
     email: state.auth.email,
-    password: state.auth.password
+    password: state.auth.password,
+    error: state.auth.error
   }; // we can probably destructure above...
 };
 

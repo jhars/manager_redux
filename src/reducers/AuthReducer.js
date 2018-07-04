@@ -1,12 +1,19 @@
 import firebase from 'firebase';
 import {
   EMAIL_CHANGED,
-  PASSWORD_CHANGED
+  PASSWORD_CHANGED,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL
  } from '../actions/types';
 
 //this is supposed to be the value of the Input
 //what the user is actually typing
-const INITIAL_STATE = { email: '', password: '' };
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+  user: null,
+  error: ''
+};
 //we don't have to default above, technically,
 // but its lets other engineers knowwhat the reducer is responsible for
 
@@ -41,6 +48,13 @@ export default (state = INITIAL_STATE, action) => {
 
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload };
+
+    case LOGIN_USER_SUCCESS:
+      return { ...state, user: action.payload };
+
+    case LOGIN_USER_FAIL:
+      return { ...state, error: 'Authentication Failed.' }; //, password: '' };
+
     default:
       return state;
   }
