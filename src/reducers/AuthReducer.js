@@ -14,9 +14,14 @@ const INITIAL_STATE = { email: '', password: '' };
 // IS TO MAKE VARIABLES THAT HOLD ACTION TYPES.
 
 export default (state = INITIAL_STATE, action) => {
+  console.log('action!');
+  console.log(action);
+  console.log('-------------');
+
   switch (action.type) {
     case EMAIL_CHANGED:
-      console.log('action!');
+
+
       //user-entered text will come in through ACTION here
 
       // what we CANNOT do:

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -16,14 +16,22 @@ class App extends Component {
       projectId: 'manager-ee97e',
       storageBucket: 'manager-ee97e.appspot.com',
       messagingSenderId: '800392028030'
-    };
+    }
     firebase.initializeApp(config);
   }
 
   // LifeCycle Method #1
+
+  // Adding New Argument into CreateSotre(A, B)...
+    // 2nd Argument is Any Initial State wwe wanted to send to ur applications
+    // Applicable to serverside rendering
+    //could be a pre-filled form, etc.
+      // applyMiddleware => STORE ENHANCER (b/c adding addtional functionality to store)
+
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <LoginForm />
       </Provider>
     );

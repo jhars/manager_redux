@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../actions';
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 //import connect helper
@@ -16,6 +16,11 @@ class LoginForm extends Component {
     //this is behaing the exact same way as when wer were using our
     // setState() call before
     this.props.emailChanged(text);
+  }
+
+  onButtonPress() {
+    const { email, password } = this.props;
+    this.props.loginUser({ email, password });
   }
 
   onPasswordChange(text) {
@@ -46,7 +51,7 @@ class LoginForm extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>
+          <Button onPress={this.onButtonPress.bind(this)}>
             Login
           </Button>
         </CardSection>
@@ -69,4 +74,6 @@ const mapStateToProps = state => {
 // b/c we wired up our Action Creator (emailChanged)
 // we now have access to a PROP inside our componenet
 // named/called -> this.props.emailChanged
-export default connect(mapStateToProps, { emailChanged, passwordChanged })(LoginForm);
+export default connect(mapStateToProps, {
+  emailChanged, passwordChanged, loginUser
+})(LoginForm);
