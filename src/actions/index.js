@@ -44,7 +44,9 @@ export const loginUser = ({ email, password }) => {
       //REDUX THUNK allows us to Expand the range of values we can return from an Action-Creator
       // Control ^& Power over what is going on in our Application
       .then(user => loginUserSuccess(dispatch, user))
-      .catch(() => {
+      .catch((error) => {
+        //KEEP THIS CONSOLE LOG HERE! (Firebase Gotchya)
+        console.log(error);
         firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(user => loginUserSuccess(dispatch, user))
           .catch(() => loginUserFail(dispatch));
