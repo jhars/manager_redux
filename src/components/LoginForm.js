@@ -4,18 +4,8 @@ import { View, Text } from 'react-native';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
-//import connect helper
-//import action creator
-// Hook it up to our componnent with the connect helper
-
 class LoginForm extends Component {
   onEmailChange(text) {
-    //call an action creator so we can update
-    //our application level state
-    //with the new value that the user has typed in
-
-    //this is behaing the exact same way as when wer were using our
-    // setState() call before
     this.props.emailChanged(text);
   }
 
@@ -25,8 +15,7 @@ class LoginForm extends Component {
   }
 
   onPasswordChange(text) {
-    // looks like this is where define the variable name- passwordChanged
-    this.props.passwordChanged(text);
+    this.props.passwordChanged(text);// is this where we define the value for: "{passwordChanged}"?
   }
 
   renderError() {
@@ -84,21 +73,13 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-  //is specifically 'auth'
-  // b/c that is the value that we assigned our reducer to
-  // in our combiedReducers call// in the reducers/index.js file
-  // our reducer is what is actually producing this 'email' property
-
   return {
     email: state.auth.email,
     password: state.auth.password,
     error: state.auth.error
-  }; // we can probably destructure above...
+  };
 };
 
-// b/c we wired up our Action Creator (emailChanged)
-// we now have access to a PROP inside our componenet
-// named/called -> this.props.emailChanged
 export default connect(mapStateToProps, {
   emailChanged, passwordChanged, loginUser
 })(LoginForm);

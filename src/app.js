@@ -16,17 +16,9 @@ class App extends Component {
       projectId: 'manager-ee97e',
       storageBucket: 'manager-ee97e.appspot.com',
       messagingSenderId: '800392028030'
-    }
+    };
     firebase.initializeApp(config);
   }
-
-  // LifeCycle Method #1
-
-  // Adding New Argument into CreateSotre(A, B)...
-    // 2nd Argument is Any Initial State wwe wanted to send to ur applications
-    // Applicable to serverside rendering
-    //could be a pre-filled form, etc.
-      // applyMiddleware => STORE ENHANCER (b/c adding addtional functionality to store)
 
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
