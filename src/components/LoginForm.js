@@ -16,8 +16,8 @@ class LoginForm extends Component {
     this.props.loginUser({ email, password });
   }
 
-  onPasswordChange(text) {
-    this.props.passwordChanged(text);// is this where we define the value for: "{passwordChanged}"?
+  onPasswordChange(text) { // is this where we define the value for: "{passwordChanged}"?
+    this.props.passwordChanged(text);
   }
 
   renderError() {
