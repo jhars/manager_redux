@@ -1,5 +1,6 @@
 import {
-  EMPLOYEE_UPDATE
+  EMPLOYEE_UPDATE,
+  EMPLOYEE_CREATE
 } from '../actions/types';
 
 //optional, but good practice to define below
@@ -16,6 +17,8 @@ export default (state = INITIAL_STATE, action) => {
       // *** NEW SYNTAX ***
       //square braces NOT an Array --> it is called Key interpolation (key is determined at runtime)
       return { ...state, [action.payload.prop]: action.payload.value };
+    case EMPLOYEE_CREATE:
+      return INITIAL_STATE;
     default:
       return state;
   }
