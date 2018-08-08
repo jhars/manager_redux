@@ -15,7 +15,6 @@ export const employeeUpdate = ({ prop, value }) => {
 };
 
 export const employeeCreate = ({ name, phone, shift }) => {
-  // console.log(name, phone, shift);
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
@@ -28,10 +27,6 @@ export const employeeCreate = ({ name, phone, shift }) => {
   };
 };
 
-// const employeePathById = ({ id }) => {
-//   return `/users/${currentUser.uid}/employees`
-// }
-
 export const employeesFetch = () => {
   const { currentUser } = firebase.auth();
 
@@ -41,10 +36,20 @@ export const employeesFetch = () => {
       //anytime any data is added tp that 'EMPLPOYEES' thing (dispatch({thingy}))
       //this "Catches" any actions on this (location)
       .on('value', snapshot => {
-        dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() })
+        dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
         //"Snapshot" is object that describes the that is in OUr PATH (current user "employees",
         //) Employees 'belong' to currentUser
         //kind of like 'META'-level Data
       });
+  };
+};
+
+export const employeeSave = ({ name, phone, shift, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .set({ name, phone, shift })
+      .then(() => console.log('saved!'));
   };
 };
