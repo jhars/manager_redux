@@ -14,14 +14,12 @@ class EmployeeCreate extends Component {
   render() {
     return (
       <Card>
-
-      <CardSection>
-      <EmployeeForm {...this.props} />
-        <Button onPress={this.onButtonPress.bind(this)}>
-          Create
-        </Button>
-      </CardSection>
-
+        <EmployeeForm {...this.props} />
+        <CardSection>
+          <Button onPress={this.onButtonPress.bind(this)}>
+            Create
+          </Button>
+        </CardSection>
       </Card>
     );
   }
